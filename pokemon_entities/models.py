@@ -3,10 +3,10 @@ from django.db import models  # noqa F401
 
 class Pokemon(models.Model):
     title_ru = models.CharField(max_length=200, verbose_name="Название покемона (рус.)")
-    title_en = models.CharField(max_length=200, null=True, blank=True, verbose_name="Название покемона (eng.)")
-    title_jp = models.CharField(max_length=200, null=True, blank=True, verbose_name="Название покемона (jap.)")
+    title_en = models.CharField(max_length=200, blank=True, verbose_name="Название покемона (eng.)")
+    title_jp = models.CharField(max_length=200, blank=True, verbose_name="Название покемона (jap.)")
     image = models.ImageField(null=True, blank=True, verbose_name="Изображение покемона")
-    description = models.TextField(null=True, verbose_name="Описание покемона")
+    description = models.TextField(blank=True, verbose_name="Описание покемона")
 
     previous_evolution = models.ForeignKey(
         "self", 
@@ -21,7 +21,7 @@ class Pokemon(models.Model):
 
 
 class PokemonEntity(models.Model):
-    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, verbose_name="Покемон")
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, verbose_name="Покемон", related_name="entities")
     lat = models.FloatField(verbose_name="широта")
     lon = models.FloatField(verbose_name="долгота")
     appeared_at = models.DateTimeField(null=True, blank=True, verbose_name="Время и дата появления")
