@@ -73,6 +73,7 @@ def show_pokemon(request, pokemon_id):
     pokemon = {
         "title_ru": requested_pokemon.title,
         "img_url": image_url,
+        "decription": requested_pokemon.description,
     }
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon_entity in PokemonEntity.objects.all():
