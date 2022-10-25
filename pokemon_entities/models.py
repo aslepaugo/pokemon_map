@@ -1,5 +1,6 @@
 from pyexpat import model
 from django.db import models  # noqa F401
+from .settings import DEFAULT_IMAGE_URL
 
 class Pokemon(models.Model):
     title_ru = models.CharField(max_length=200, verbose_name="Название покемона (рус.)")
@@ -18,6 +19,12 @@ class Pokemon(models.Model):
 
     def __str__(self):
         return self.title_ru
+
+
+    def get_image_url(self, request):
+        if self.image:
+            return request.build_absolute_uri(self.image.url)
+        return DEFAULT_IMAGE_URL
 
 
 class PokemonEntity(models.Model):
