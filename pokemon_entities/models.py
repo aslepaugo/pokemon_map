@@ -11,7 +11,7 @@ class Pokemon(models.Model):
     previous_evolution = models.ForeignKey(
         "self", 
         on_delete=models.SET_NULL, 
-        related_name="next_evolution", 
+        related_name="next_evolutions", 
         null=True, 
         blank=True,
         verbose_name="Из кого эволюционировал")
