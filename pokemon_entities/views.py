@@ -78,7 +78,7 @@ def show_pokemon(request, pokemon_id):
             "img_url": previous_evolutions.get_image_url(request),
         }    
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-    for pokemon_entity in requested_pokemon.entities.all():
+    for pokemon_entity in requested_pokemon.entities.filter(appeared_at__lt=local_time, disappeared_at__gt=local_time):
         add_pokemon(
             folium_map, 
             pokemon_entity.lat,
